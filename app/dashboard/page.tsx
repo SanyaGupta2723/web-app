@@ -10,6 +10,8 @@ export default function DashboardPage() {
     const [latestResult, setLatestResult] = useState<any>(null);
     const [hotNumbers, setHotNumbers] = useState<any[]>([]);
     const [coldNumbers, setColdNumbers] = useState<any[]>([]);
+    const [latestPrediction, setLatestPrediction] =
+  useState<any>(null);
     
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -41,6 +43,12 @@ export default function DashboardPage() {
   .then((res) => res.json())
   .then((data) => {
     setColdNumbers(data.coldNumbers);
+  });
+
+  fetch("http://localhost:3000/api/dashboard/latest-prediction")
+  .then((res) => res.json())
+  .then((data) => {
+    setLatestPrediction(data.prediction);
   });
   }, []);
 
@@ -145,6 +153,29 @@ export default function DashboardPage() {
 
   <HotNumbersChart data={hotNumbers} />
 </div>
+</div>
+<div className="border rounded-xl p-6 mt-6">
+  <h2 className="text-xl font-bold mb-3">
+    🎯 Latest Prediction
+  </h2>
+
+  {latestPrediction && (
+    <>
+      <p className="text-2xl font-bold">
+        {latestPrediction.predictedNumbers?.join(" - ")}
+      </p>
+
+      <p className="mt-2">
+        Confidence:
+        {latestPrediction.confidence}%
+      </p>
+
+      <p>
+        Model:
+        {latestPrediction.modelUsed}
+      </p>
+    </>
+  )}
 </div>
     </div>
 
