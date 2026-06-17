@@ -6,7 +6,8 @@ export async function GET() {
   await connectDB();
 
   const predictions = await Prediction.find()
-    .sort({ createdAt: -1 });
+    .sort({ createdAt: -1 })
+    .limit(20);
 
   return NextResponse.json({
     success: true,

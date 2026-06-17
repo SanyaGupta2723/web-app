@@ -19,6 +19,17 @@ const PredictionSchema = new Schema(
       type: String,
       default: "Pending",
     },
+    actualNumbers: [Number],
+
+matchedCount: {
+  type: Number,
+  default: 0,
+},
+
+accuracy: {
+  type: Number,
+  default: 0,
+},
   },
   {
     timestamps: true,

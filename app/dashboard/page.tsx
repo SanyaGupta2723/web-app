@@ -12,6 +12,8 @@ export default function DashboardPage() {
     const [coldNumbers, setColdNumbers] = useState<any[]>([]);
     const [latestPrediction, setLatestPrediction] =
   useState<any>(null);
+  const [accuracyData, setAccuracyData] =
+  useState<any>(null);
     
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -49,6 +51,11 @@ export default function DashboardPage() {
   .then((res) => res.json())
   .then((data) => {
     setLatestPrediction(data.prediction);
+  });
+  fetch("http://localhost:3000/api/analytics/accuracy")
+  .then((res) => res.json())
+  .then((data) => {
+    setAccuracyData(data);
   });
   }, []);
 
@@ -173,6 +180,24 @@ export default function DashboardPage() {
       <p>
         Model:
         {latestPrediction.modelUsed}
+      </p>
+    </>
+  )}
+</div>
+<div className="border rounded-xl p-6 mt-6">
+  <h2 className="text-xl font-bold mb-3">
+    🎯 Prediction Accuracy
+  </h2>
+
+  {accuracyData && (
+    <>
+      <p>
+        Matched:
+        {accuracyData.matchedCount}/5
+      </p>
+
+      <p className="text-2xl font-bold mt-2">
+        {accuracyData.accuracy.toFixed(2)}%
       </p>
     </>
   )}
