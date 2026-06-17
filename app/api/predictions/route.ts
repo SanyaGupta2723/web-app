@@ -23,12 +23,18 @@ export async function GET() {
       .slice(0, 5)
       .map(([num]) => Number(num));
 
-    const prediction = await Prediction.create({
-      predictedNumbers,
-      confidence: 75,
-      risk: "Medium",
-      modelUsed: "Frequency Analysis",
-    });
+const prediction = new Prediction({
+  predictedNumbers,
+  confidence: 75,
+  risk: "Medium",
+  modelUsed: "Frequency Analysis",
+});
+
+console.log("BEFORE SAVE:", prediction);
+
+await prediction.save();
+
+console.log("AFTER SAVE:", prediction);
 
     return NextResponse.json({
       success: true,

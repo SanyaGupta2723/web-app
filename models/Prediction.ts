@@ -2,9 +2,23 @@ import mongoose, { Schema } from "mongoose";
 
 const PredictionSchema = new Schema(
   {
+    lotteryId: {
+      type: Schema.Types.ObjectId,
+      ref: "Lottery",
+    },
+
     predictedNumbers: [Number],
+
     confidence: Number,
-    model: String,
+
+    risk: String,
+
+    modelUsed: String,
+
+    status: {
+      type: String,
+      default: "Pending",
+    },
   },
   {
     timestamps: true,
