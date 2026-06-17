@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import HotNumbersChart from "../../src/components/HotNumbersChart";
 
 
 export default function DashboardPage() {
@@ -137,6 +138,13 @@ export default function DashboardPage() {
       </div>
     ))}
   </div>
+  <div className="border rounded-xl p-6 mt-6">
+  <h2 className="text-xl font-bold mb-4">
+    Hot Numbers Analytics
+  </h2>
+
+  <HotNumbersChart data={hotNumbers} />
+</div>
 </div>
     </div>
 
