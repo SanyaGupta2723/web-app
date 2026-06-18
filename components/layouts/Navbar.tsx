@@ -49,6 +49,7 @@ export default function Navbar() {
           <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-black">
             S
           </div>
+           
 
         </div>
 
