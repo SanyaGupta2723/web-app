@@ -46,9 +46,16 @@ export default function LandingNavbar() {
   Home
 </Link>
 
-          <a className="text-slate-400 hover:text-white transition">
-            Features
-          </a>
+          <Link
+  href="/features"
+  className={`transition ${
+    pathname === "/features"
+      ? "text-cyan-400 font-semibold"
+      : "text-slate-400 hover:text-white"
+  }`}
+>
+  Features
+</Link>
 
           <Link
   href="/analytics"
@@ -61,9 +68,16 @@ export default function LandingNavbar() {
   Analytics
 </Link>
 
-          <a className="text-slate-400 hover:text-white transition">
-            How It Works
-          </a>
+          <Link
+  href="/how-it-works"
+  className={`transition ${
+    pathname === "/how-it-works"
+      ? "text-cyan-400 font-semibold"
+      : "text-slate-400 hover:text-white"
+  }`}
+>
+  How It Works
+</Link>
 
           <a className="text-slate-400 hover:text-white transition">
             About
