@@ -79,13 +79,27 @@ export default function LandingNavbar() {
   How It Works
 </Link>
 
-          <a className="text-slate-400 hover:text-white transition">
-            About
-          </a>
+          <Link
+  href="/about"
+  className={`transition ${
+    pathname === "/about"
+      ? "text-cyan-400 font-semibold"
+      : "text-slate-400 hover:text-white"
+  }`}
+>
+  About
+</Link>
 
-          <a className="text-slate-400 hover:text-white transition">
-            Contact
-          </a>
+          <Link
+  href="/contact"
+  className={`transition ${
+    pathname === "/contact"
+      ? "text-cyan-400 font-semibold"
+      : "text-slate-400 hover:text-white"
+  }`}
+>
+  Contact
+</Link>
 
         </div>
 
