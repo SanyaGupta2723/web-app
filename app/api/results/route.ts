@@ -2,10 +2,12 @@ import { NextResponse } from "next/server";
 
 import { connectDB } from "@/lib/mongodb";
 import Result from "@/models/Result";
+import Prediction from "@/models/Prediction";
 
 
 // GET RESULTS
 export async function GET() {
+  
   try {
     await connectDB();
 
@@ -46,6 +48,44 @@ export async function POST(req: Request) {
       winningNumbers,
       jackpot,
     });
+
+    // FIND ALL PENDING PREDICTIONS
+
+const predictions = await Prediction.find({
+  lotteryId,
+  status: "Pending",
+});
+
+for (const prediction of predictions) {
+
+  const matches =
+    prediction.predictedNumbers.filter(
+      (num: number) =>
+        winningNumbers.includes(num)
+    );
+
+  const matchedCount =
+    matches.length;
+
+  const accuracy =
+    Number(
+      ((matchedCount / 5) * 100).toFixed(2)
+    );
+
+  prediction.actualNumbers =
+    winningNumbers;
+
+  prediction.matchedCount =
+    matchedCount;
+
+  prediction.accuracy =
+    accuracy;
+
+  prediction.status =
+    "Completed";
+
+  await prediction.save();
+}
 
     return NextResponse.json({
       success: true,
