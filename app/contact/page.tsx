@@ -101,9 +101,7 @@ const handleSubmit = async () => {
                 Contact Support
               </button>
 
-              <button className="px-6 py-3 rounded-xl border border-slate-700 hover:border-cyan-500 transition">
-                View FAQ
-              </button>
+              
 
             </div>
 

@@ -33,7 +33,7 @@ export default function CTA() {
           <div className="flex gap-4">
 
             <button
-              onClick={() => router.push("/login")}
+              onClick={() => router.push("/about")}
               className="px-8 py-4 rounded-2xl border border-slate-700 hover:border-cyan-500 transition"
             >
               Learn More

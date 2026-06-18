@@ -69,14 +69,14 @@ export default function LandingNavbar() {
 </Link>
 
           <Link
-  href="/how-it-works"
+  href="/login"
   className={`transition ${
-    pathname === "/how-it-works"
+    pathname === "/login"
       ? "text-cyan-400 font-semibold"
       : "text-slate-400 hover:text-white"
   }`}
 >
-  How It Works
+  Dashboard
 </Link>
 
           <Link

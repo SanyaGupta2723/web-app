@@ -2,8 +2,64 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function LoginPage() {
+  const [loading, setLoading] = useState(false);
+
+const handleLogin = async () => {
+  try {
+    setLoading(true);
+
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+
+      localStorage.setItem(
+        "token",
+        data.token
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      toast.success(
+        `Welcome Back ${data.user.name} 🚀`
+      );
+
+      router.push("/dashboard");
+
+    } else {
+
+      toast.error(data.message);
+
+    }
+
+  } catch (error) {
+
+    toast.error(
+      "Something went wrong"
+    );
+
+  } finally {
+
+    setLoading(false);
+
+  }
+};
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -36,6 +92,8 @@ export default function LoginPage() {
             <input
               type="email"
               placeholder="Enter your email"
+               name="fake-email"
+               autoComplete="off"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-cyan-500"
@@ -57,10 +115,12 @@ export default function LoginPage() {
           </div>
 
           <button
-            className="w-full py-3 rounded-xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition"
-          >
-            Login
-          </button>
+  onClick={handleLogin}
+  disabled={loading}
+  className="w-full py-3 rounded-xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition disabled:opacity-50"
+>
+  {loading ? "Signing In..." : "Login"}
+</button>
 
         </div>
 

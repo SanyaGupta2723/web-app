@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -9,6 +10,28 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const handleRegister = async () => {
+  const res = await fetch("/api/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      password,
+    }),
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    toast.success("🎉 Account Created Successfully!");
+    router.push("/login");
+  } else {
+    alert(data.message);
+  }
+};
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
@@ -72,10 +95,11 @@ export default function RegisterPage() {
           </div>
 
           <button
-            className="w-full py-3 rounded-xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition"
-          >
-            Create Account
-          </button>
+  onClick={handleRegister}
+  className="w-full py-3 rounded-xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition"
+>
+  Create Account
+</button>
 
         </div>
 

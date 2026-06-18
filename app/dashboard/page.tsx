@@ -6,9 +6,20 @@ import HotNumbersChart from "../../src/components/HotNumbersChart";
 import Sidebar from "../../components/layouts/Sidebar";
 import Navbar from "../../components/layouts/Navbar";
 
+import { useRouter } from "next/navigation";
+
 
 
 export default function DashboardPage() {
+  const router = useRouter();
+
+useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    router.push("/login");
+  }
+}, []);
 
     const [latestResult, setLatestResult] = useState<any>(null);
     const [hotNumbers, setHotNumbers] = useState<any[]>([]);
