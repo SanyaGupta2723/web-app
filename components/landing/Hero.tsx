@@ -45,14 +45,14 @@ export default function Hero() {
           <div className="flex gap-5 mt-10">
 
             <button
-              onClick={() => router.push("/register")}
+              onClick={() => router.push("/analytics")}
               className="px-8 py-4 rounded-2xl bg-cyan-500 text-black font-semibold"
             >
               Get Started →
             </button>
 
             <button
-              onClick={() => router.push("/dashboard")}
+              onClick={() => router.push("/analytics")}
               className="px-8 py-4 rounded-2xl border border-slate-700"
             >
               Explore Analytics

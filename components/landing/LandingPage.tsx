@@ -2,8 +2,12 @@
 
 import { useRouter } from "next/navigation";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 export default function LandingNavbar() {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#040B1F]/90 border-b border-slate-800">
@@ -31,17 +35,31 @@ export default function LandingNavbar() {
 
         <div className="hidden lg:flex items-center gap-10">
 
-          <a className="text-cyan-400 font-medium">
-            Home
-          </a>
+          <Link
+  href="/"
+  className={`transition ${
+    pathname === "/"
+      ? "text-cyan-400 font-semibold"
+      : "text-slate-400 hover:text-white"
+  }`}
+>
+  Home
+</Link>
 
           <a className="text-slate-400 hover:text-white transition">
             Features
           </a>
 
-          <a className="text-slate-400 hover:text-white transition">
-            Analytics
-          </a>
+          <Link
+  href="/analytics"
+  className={`transition ${
+    pathname === "/analytics"
+      ? "text-cyan-400 font-semibold"
+      : "text-slate-400 hover:text-white"
+  }`}
+>
+  Analytics
+</Link>
 
           <a className="text-slate-400 hover:text-white transition">
             How It Works
