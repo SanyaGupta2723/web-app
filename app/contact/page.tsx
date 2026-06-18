@@ -2,9 +2,58 @@
 
 import Navbar from "@/components/landing/LandingPage";
 import Footer from "@/components/landing/Footer";
+import { useState } from "react";
+import { toast } from "sonner";
+
+
 
 export default function ContactPage() {
+
+    const [form, setForm] = useState({
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+});
+
+const [loading, setLoading] = useState(false);
+
+const handleSubmit = async () => {
+  try {
+    setLoading(true);
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      toast.success("Message Sent Successfully!");
+
+      setForm({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to send message");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
+
+    
     <div className="min-h-screen bg-[#030B1F] text-white">
 
       <Navbar />
@@ -111,9 +160,7 @@ export default function ContactPage() {
 
 <section className="max-w-7xl mx-auto px-6 pb-24">
 
-  <div className="grid lg:grid-cols-2 gap-8">
-
-    {/* LEFT - FORM */}
+<div className="grid lg:grid-cols-2 gap-8">
 
     <div className="bg-[#0F172A] border border-slate-800 rounded-3xl p-8">
 
@@ -130,37 +177,46 @@ export default function ContactPage() {
         <input
           type="text"
           placeholder="Full Name"
+          value={form.name}
+          onChange={(e) =>
+            setForm({ ...form, name: e.target.value })
+          }
           className="w-full h-14 px-5 rounded-xl bg-[#081126] border border-slate-700 focus:border-cyan-500 outline-none"
         />
 
         <input
           type="email"
           placeholder="Email Address"
+          value={form.email}
+          onChange={(e) =>
+            setForm({ ...form, email: e.target.value })
+          }
           className="w-full h-14 px-5 rounded-xl bg-[#081126] border border-slate-700 focus:border-cyan-500 outline-none"
         />
-
-        <select
-          className="w-full h-14 px-5 rounded-xl bg-[#081126] border border-slate-700 focus:border-cyan-500 outline-none"
-        >
-          <option>General Inquiry</option>
-          <option>Technical Support</option>
-          <option>Business Partnership</option>
-          <option>Bug Report</option>
-        </select>
 
         <input
           type="text"
           placeholder="Subject"
+          value={form.subject}
+          onChange={(e) =>
+            setForm({ ...form, subject: e.target.value })
+          }
           className="w-full h-14 px-5 rounded-xl bg-[#081126] border border-slate-700 focus:border-cyan-500 outline-none"
         />
 
         <textarea
           rows={6}
           placeholder="Write your message..."
+          value={form.message}
+          onChange={(e) =>
+            setForm({ ...form, message: e.target.value })
+          }
           className="w-full p-5 rounded-xl bg-[#081126] border border-slate-700 focus:border-cyan-500 outline-none"
         />
 
         <button
+          onClick={handleSubmit}
+          disabled={loading}
           className="
           w-full
           py-4
@@ -171,9 +227,10 @@ export default function ContactPage() {
           font-semibold
           hover:scale-[1.02]
           transition
+          disabled:opacity-50
           "
         >
-          Send Message
+          {loading ? "Sending..." : "Send Message"}
         </button>
 
       </div>
