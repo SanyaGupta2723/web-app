@@ -8,9 +8,25 @@ export async function POST(req: Request) {
   try {
     await connectDB();
 
-    const { name, email, password } = await req.json();
+    const {
+  name,
+  email,
+  password,
+  role,
+  adminCode,
+} = await req.json();
 
     if (!name || !email || !password) {
+      if (role === "admin") {
+  if (adminCode !== "REALTRACK2026") {
+    return NextResponse.json(
+      {
+        message: "Invalid Admin Access Code",
+      },
+      { status: 400 }
+    );
+  }
+}
       return NextResponse.json(
         { message: "All fields are required" },
         { status: 400 }
@@ -32,6 +48,7 @@ export async function POST(req: Request) {
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     return NextResponse.json(

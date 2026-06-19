@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-const [role, setRole] = useState("user");
-const [adminCode, setAdminCode] = useState("");
+
 
 export default function RegisterPage() {
+  const [role, setRole] = useState("user");
+const [adminCode, setAdminCode] = useState("");
   const router = useRouter();
 
   const [name, setName] = useState("");
