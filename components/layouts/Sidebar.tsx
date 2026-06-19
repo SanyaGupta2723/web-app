@@ -30,7 +30,7 @@ export default function Sidebar() {
         <nav className="p-5 space-y-2">
 
           <Link
-            href="/dashboard"
+            href="/admin/dashboard"
             className="flex items-center gap-4 px-5 py-4 rounded-2xl bg-cyan-500/10 border border-cyan-500 text-cyan-400 font-medium"
           >
             📊
@@ -38,7 +38,7 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            href="/predictions"
+            href="/admin/predictions"
             className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 hover:bg-slate-800 transition-all"
           >
             🎯
@@ -46,7 +46,7 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            href="/results"
+            href="/admin/results"
             className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 hover:bg-slate-800 transition-all"
           >
             🏆
@@ -54,7 +54,7 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            href="/analytics"
+            href="/admin/analytics"
             className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 hover:bg-slate-800 transition-all"
           >
             📈
@@ -62,7 +62,7 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            href="/users"
+            href="/admin/users"
             className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 hover:bg-slate-800 transition-all"
           >
             👥
@@ -70,7 +70,7 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            href="/reports"
+            href="/admin/reports"
             className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 hover:bg-slate-800 transition-all"
           >
             📄
@@ -78,7 +78,7 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            href="/settings"
+            href="/admin/settings"
             className="flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 hover:bg-slate-800 transition-all"
           >
             ⚙️

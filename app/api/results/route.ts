@@ -56,7 +56,16 @@ const predictions = await Prediction.find({
   status: "Pending",
 });
 
+console.log(
+  "Pending Predictions Found:",
+  predictions.length
+);
+
 for (const prediction of predictions) {
+  console.log(
+  "Updating Prediction:",
+  prediction._id
+);
 
   const matches =
     prediction.predictedNumbers.filter(

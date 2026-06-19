@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import HotNumbersChart from "../../src/components/HotNumbersChart";
-import Sidebar from "../../components/layouts/Sidebar";
-import Navbar from "../../components/layouts/Navbar";
+import HotNumbersChart from "@/src/components/HotNumbersChart";
+import Sidebar from "@/components/layouts/Sidebar";
+import Navbar from "@/components/layouts/Navbar";
 
 import { useRouter } from "next/navigation";
 
@@ -81,11 +81,7 @@ useEffect(() => {
   }, []);
 
   return (
-      <div className="flex">
-    <Sidebar />
-
-    <main className="flex-1 min-h-screen bg-slate-950 text-white">
-      <Navbar />
+      
 
    <div className="p-8">
 
@@ -576,7 +572,6 @@ useEffect(() => {
 </div>
 
           </div>
-    </main>
-  </div>
+    
 );
 }
