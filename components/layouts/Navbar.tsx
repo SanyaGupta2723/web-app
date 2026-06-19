@@ -1,4 +1,38 @@
+
+"use client";
+
+import { useState } from "react";
+
+
+
+
 export default function Navbar() {
+  const [loading, setLoading] = useState(false);
+  const generatePrediction = async () => {
+  try {
+    setLoading(true);
+
+    const res = await fetch(
+      "/api/predictions/generate"
+    );
+
+    const data = await res.json();
+
+    console.log(data);
+
+    if (data.success) {
+      alert("Prediction Generated Successfully");
+
+      window.location.reload();
+    }
+
+  } catch (error) {
+    console.log(error);
+    alert("Failed to generate prediction");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <header className="h-24 px-8 flex items-center justify-between border-b border-slate-800 bg-[#081120]">
 
@@ -29,9 +63,15 @@ export default function Navbar() {
         </button>
 
         {/* Generate Prediction */}
-        <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:scale-105 transition">
-          ⚡ Generate Prediction
-        </button>
+        <button
+  onClick={generatePrediction}
+  disabled={loading}
+  className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:scale-105 transition"
+>
+  {loading
+    ? "Generating..."
+    : "⚡ Generate Prediction"}
+</button>
 
         {/* Profile */}
         <div className="flex items-center gap-3 ml-2">

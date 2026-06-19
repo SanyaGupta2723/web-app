@@ -417,7 +417,7 @@ useEffect(() => {
 
             <div className="text-center">
               <h2 className="text-3xl font-bold text-white">
-                {accuracyData.accuracy.toFixed(1)}%
+                {accuracyData?.overallAccuracy?.toFixed(1) ?? "0.0"}%
               </h2>
 
               <p className="text-xs text-slate-400">
@@ -473,20 +473,28 @@ useEffect(() => {
         <tr className="border-b border-slate-700">
 
           <th className="py-4 text-left text-slate-400">
-            Date
-          </th>
+  Date
+</th>
 
-          <th className="py-4 text-left text-slate-400">
-            Prediction
-          </th>
+<th className="py-4 text-left text-slate-400">
+  Prediction
+</th>
 
-          <th className="py-4 text-center text-slate-400">
-            Confidence
-          </th>
+<th className="py-4 text-left text-slate-400">
+  Actual Result
+</th>
 
-          <th className="py-4 text-center text-slate-400">
-            Risk
-          </th>
+<th className="py-4 text-center text-slate-400">
+  Matches
+</th>
+
+<th className="py-4 text-center text-slate-400">
+  Accuracy
+</th>
+
+<th className="py-4 text-center text-slate-400">
+  Status
+</th>
 
         </tr>
 
@@ -502,30 +510,58 @@ useEffect(() => {
           >
 
             <td className="py-4">
-              {new Date(
-                item.createdAt
-              ).toLocaleDateString()}
-            </td>
+  {new Date(item.createdAt).toLocaleDateString()}
+</td>
 
-            <td className="py-4 font-medium text-cyan-400">
-              {item.predictedNumbers.join(" - ")}
-            </td>
+<td className="py-4 font-medium text-cyan-400">
+  {item.predictedNumbers?.join(" - ")}
+</td>
 
-            <td className="text-center">
+<td className="py-4 text-slate-300">
+  {item.actualNumbers?.length
+    ? item.actualNumbers.join(" - ")
+    : "Waiting..."}
+</td>
 
-              <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-sm">
-                {item.confidence}%
-              </span>
+<td className="text-center">
 
-            </td>
+  <span className="px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 text-sm">
 
-            <td className="text-center">
+    {item.status === "Completed"
+      ? item.matchedCount
+      : "--"}
 
-              <span className="px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-sm">
-                {item.risk}
-              </span>
+  </span>
 
-            </td>
+</td>
+
+<td className="text-center">
+
+  <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm">
+
+    {item.status === "Completed"
+      ? `${item.accuracy}%`
+      : "--"}
+
+  </span>
+
+</td>
+
+<td className="text-center">
+
+  <span
+    className={`px-3 py-1 rounded-full text-sm ${
+      item.status === "Completed"
+        ? "bg-green-500/10 text-green-400"
+        : "bg-yellow-500/10 text-yellow-400"
+    }`}
+  >
+
+    {item.status}
+
+  </span>
+
+</td>
 
           </tr>
 
