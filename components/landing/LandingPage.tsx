@@ -5,9 +5,23 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { useEffect, useState } from "react";
+
+
 export default function LandingNavbar() {
+
   const router = useRouter();
   const pathname = usePathname();
+
+  const [user, setUser] = useState<any>(null);
+
+useEffect(() => {
+  const storedUser = localStorage.getItem("user");
+
+  if (storedUser) {
+    setUser(JSON.parse(storedUser));
+  }
+}, []);
 
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#040B1F]/90 border-b border-slate-800">
@@ -103,26 +117,35 @@ export default function LandingNavbar() {
 
         </div>
 
-        {/* Buttons */}
+<div className="flex items-center gap-4">
 
-        <div className="flex items-center gap-4">
+  {pathname.startsWith("/users") && user ? (
 
-          <button
-            onClick={() => router.push("/login")}
-            className="px-6 py-3 rounded-xl border border-slate-700 hover:border-cyan-500 transition"
-          >
-            Login
-          </button>
+    <button className="px-6 py-3 rounded-xl bg-cyan-500 text-black font-semibold">
+      👤 {user.name}
+    </button>
 
-          <button
-            onClick={() => router.push("/register")}
-            className="px-6 py-3 rounded-xl bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
-          >
-            Sign Up
-          </button>
+  ) : (
 
-        </div>
+    <>
+      <button
+        onClick={() => router.push("/login")}
+        className="px-6 py-3 rounded-xl border border-slate-700 hover:border-cyan-500 transition"
+      >
+        Login
+      </button>
 
+      <button
+        onClick={() => router.push("/register")}
+        className="px-6 py-3 rounded-xl bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
+      >
+        Sign Up
+      </button>
+    </>
+
+  )}
+
+</div>
       </div>
 
     </nav>

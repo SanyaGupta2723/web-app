@@ -1,4 +1,4 @@
-import LandingNavbar from "../components/landing/LandingPage";
+import LandingPage from "../components/landing/LandingPage";
 import Hero from "@/components/landing/Hero";
 import Features from "@/components/landing/Features";
 import Stats from "@/components/landing/Stats";
@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#030B1F] text-white">
 
-      <LandingNavbar />
+      <LandingPage />
 
       <Hero />
 
