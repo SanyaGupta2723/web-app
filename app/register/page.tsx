@@ -30,12 +30,12 @@ const [adminCode, setAdminCode] = useState("");
 
   const data = await res.json();
 
-  if (data.success) {
-    toast.success("🎉 Account Created Successfully!");
-    router.push("/login");
-  } else {
-    alert(data.message);
-  }
+if (data.success) {
+  toast.success("🎉 Account Created Successfully!");
+  router.push("/login");
+} else {
+  toast.error(data.message);
+}
 };
 
   return (

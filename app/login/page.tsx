@@ -40,7 +40,7 @@ const handleLogin = async () => {
         `Welcome Back ${data.user.name} 🚀`
       );
 
-      router.push("/dashboard");
+      router.push("/admin/dashboard");
 
     } else {
 

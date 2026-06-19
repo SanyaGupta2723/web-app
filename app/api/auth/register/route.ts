@@ -15,9 +15,22 @@ export async function POST(req: Request) {
   role,
   adminCode,
 } = await req.json();
+console.log({
+  name,
+  email,
+  role,
+  adminCode,
+});
 
     if (!name || !email || !password) {
-      if (role === "admin") {
+
+      return NextResponse.json(
+        { message: "All fields are required" },
+        { status: 400 }
+      );
+    }
+
+          if (role === "admin") {
   if (adminCode !== "REALTRACK2026") {
     return NextResponse.json(
       {
@@ -27,11 +40,6 @@ export async function POST(req: Request) {
     );
   }
 }
-      return NextResponse.json(
-        { message: "All fields are required" },
-        { status: 400 }
-      );
-    }
 
     const existingUser = await User.findOne({ email });
 
