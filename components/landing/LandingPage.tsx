@@ -5,13 +5,15 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef, } from "react";
+
 
 
 export default function LandingNavbar() {
 
   const router = useRouter();
   const pathname = usePathname();
+  
 
   const [user, setUser] = useState<any>(null);
 
