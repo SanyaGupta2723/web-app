@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { useEffect, useState,useRef, } from "react";
+import { useEffect, useState } from "react";
 
 
 
@@ -16,6 +16,7 @@ export default function LandingNavbar() {
   
 
   const [user, setUser] = useState<any>(null);
+  const [open, setOpen] = useState(false);
 
 useEffect(() => {
   const storedUser = localStorage.getItem("user");
@@ -123,9 +124,45 @@ useEffect(() => {
 
   {pathname.startsWith("/users") && user ? (
 
-    <button className="px-6 py-3 rounded-xl bg-cyan-500 text-black font-semibold">
-      👤 {user.name}
-    </button>
+    <div className="relative">
+  <button
+    onClick={() => setOpen(!open)}
+    className="px-6 py-3 rounded-xl bg-cyan-500 text-black font-semibold"
+  >
+    👤 {user.name} ▼
+  </button>
+
+  {open && (
+    <div className="absolute right-0 mt-2 w-52 bg-slate-900 border border-slate-700 rounded-xl overflow-hidden">
+
+      <button
+        onClick={() => router.push("/users/profile")}
+        className="w-full text-left px-4 py-3 hover:bg-slate-800"
+      >
+        👤 Profile
+      </button>
+
+      <button
+        onClick={() => router.push("/users/settings")}
+        className="w-full text-left px-4 py-3 hover:bg-slate-800"
+      >
+        ⚙ Settings
+      </button>
+
+      <button
+        onClick={() => {
+          localStorage.removeItem("user");
+          localStorage.removeItem("token");
+          router.push("/login");
+        }}
+        className="w-full text-left px-4 py-3 text-red-400 hover:bg-slate-800"
+      >
+        🚪 Logout
+      </button>
+
+    </div>
+  )}
+</div>
 
   ) : (
 

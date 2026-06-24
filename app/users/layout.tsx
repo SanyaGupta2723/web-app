@@ -1,5 +1,4 @@
-import LandingNavbar from "@/components/landing/LandingPage";
-
+import UserNavbar from "../users/UserNavbar";
 export default function UsersLayout({
   children,
 }: {
@@ -7,7 +6,7 @@ export default function UsersLayout({
 }) {
   return (
     <div className="min-h-screen bg-[#040B1F] text-white">
-      <LandingNavbar />
+      <UserNavbar />
 
       <main className="max-w-7xl mx-auto px-6 py-8">
         {children}
