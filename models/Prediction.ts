@@ -6,6 +6,11 @@ const PredictionSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Lottery",
     },
+    userId: {
+  type: Schema.Types.ObjectId,
+  ref: "User",
+  required: true,
+},
 
     predictedNumbers: [Number],
 
